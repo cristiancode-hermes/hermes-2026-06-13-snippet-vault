@@ -27,10 +27,10 @@
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.10.0",
     "class-transformer": "^0.5.1",
-    "pg": "^16.4.0",
     "class-validator": "^0.15.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "pg": "^8.13.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "sql.js": "^1.14.1",
@@ -44,10 +44,22 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.3",
     "@types/passport-jwt": "^4.0.1",
+    "@types/supertest": "^6.0.3",
     "jest": "^30.4.2",
+    "supertest": "^7.1.0",
     "ts-jest": "^29.4.11",
     "ts-loader": "^9.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
+  },
+  "jest": {
+    "moduleFileExtensions": ["js", "json", "ts"],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "coverageDirectory": "./coverage"
   }
 }
