@@ -18,12 +18,24 @@ import { User } from './auth/user.entity';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'better-sqlite3' as any,
-        database: config.get<string>('DATABASE_URL', 'data/snippets.db'),
-        entities: [Snippet, Tag, Collection, AiAnalysis, User],
-        synchronize: true,
-      }),
+      useFactory: (config: ConfigService) => {
+        const dbType = config.get<string>('DATABASE_TYPE', 'better-sqlite3');
+        if (dbType === 'postgres') {
+          return {
+            type: 'postgres',
+            url: config.get<string>('DATABASE_URL'),
+            entities: [Snippet, Tag, Collection, AiAnalysis, User],
+            synchronize: true,
+            ssl: { rejectUnauthorized: false },
+          };
+        }
+        return {
+          type: 'better-sqlite3',
+          database: config.get<string>('DATABASE_URL', 'data/snippets.db'),
+          entities: [Snippet, Tag, Collection, AiAnalysis, User],
+          synchronize: true,
+        };
+      },
     }),
     AuthModule,
     SnippetsModule,
