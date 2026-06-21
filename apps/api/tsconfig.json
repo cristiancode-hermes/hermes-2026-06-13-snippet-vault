@@ -19,5 +19,6 @@
     "resolveJsonModule": true,
     "ignoreDeprecations": "6.0",
     "types": ["node", "jest"]
-  }
+  },
+  "exclude": ["node_modules", "dist", "test"]
 }
